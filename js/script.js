@@ -1,3 +1,4 @@
+'use strict';
 function playVideo() {
     document.querySelector('.video').classList.remove('display-none');
     document.querySelector('.video-content').classList.add('show');
@@ -41,3 +42,29 @@ let mobileBtn = document.querySelector('.mobile_btn');
 mobileBtn.addEventListener("click", function () {
     mobileNav(mobileBtn)
 });
+
+let cards = document.querySelectorAll('.menu-card');
+for (let i = 0; i < cards.length; i++) {
+    cards[i].onclick = function (e) {
+
+        if (e.target.parentNode.classList.contains('menu-card__diameters') === true) {
+            for (let i = 0; i < e.target.parentNode.children.length; i++) {
+                e.target.parentNode.children[i].classList.remove('active');
+            }
+            e.target.classList.add('active');
+        }
+        if (e.target.classList.contains('plus') === true) {
+            let q = +cards[i].querySelector('.menu-card-info__quantity span').textContent;
+            cards[i].querySelector('.menu-card-info__quantity span').innerHTML = ++q;
+        }
+        if (e.target.classList.contains('minus') === true) {
+            let q = +cards[i].querySelector('.menu-card-info__quantity span').textContent;
+            if (q > 1) {
+                cards[i].querySelector('.menu-card-info__quantity span').innerHTML = --q;
+            }
+        }
+
+    }
+
+};
+
